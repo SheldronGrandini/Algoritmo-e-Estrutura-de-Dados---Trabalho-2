@@ -8,6 +8,6 @@ class Elemento {
         Elemento(int id);
         virtual ~Elemento(); //Destrutor "geral" 
 
-        int getId() const;
+        int GetId() const;
         virtual void ImprimirInfo() const = 0; //Classe abstrata com um método virtual puro
 };

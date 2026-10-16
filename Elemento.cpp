@@ -9,6 +9,6 @@ Elemento::Elemento(int id){
 Elemento::~Elemento(){};
 
 //Método que retorna o id, necessário devido ao encapsulamento
-int Elemento::getId() const{
+int Elemento::GetId() const{
     return id;
 };
