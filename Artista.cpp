@@ -16,6 +16,7 @@ string Artista::GetNome() const{
 }
 
 //Método para mostrar as informações do Artista (id e nome)
+//Mantivemos o Elemento::GetId e Artista::GetNome para visualizar exatamente de qual classe os métodos rodam
 void Artista::ImprimirInfo() const {
     cout << "O id do artista é " << Elemento::GetId() << endl;
     cout << "O nome do artista é " << Artista::GetNome() << endl;
