@@ -5,9 +5,27 @@ using namespace std;
 #include "ListaOrdenada.h"
 #include "ListaNaoOrdenada.h"
 
+void QuebraLinha(){
+    cout << endl << "=============================" << endl << endl;
+}
+
+//Adiciona os objetos criados a uma lista sequencial ordenada
+void PreencherListaOrdenada(ListaOrdenada& lista, Elemento* vetor[], int tamanho){
+    for(int i = 0; i < tamanho; i++){
+        lista.InserirNoInicio(vetor[i]);
+    }
+}
+
+//Adiciona os objetos criados a uma lista sequencial não ordenada
+void PreencherListaNaoOrdenada(ListaNaoOrdenada& lista, Elemento* vetor[], int tamanho){
+        for(int i = 0; i < tamanho; i++){
+        lista.InserirNoFinal(vetor[i]);
+    }
+}
+
 int main(){
-    cout << "Arquivos compilados" << endl; //Print para confirmar que o código foi compilado
-    cout << "=============================" << endl; //Quebra linha
+    cout << "Arquivos compilados!" << endl; //Print para confirmar que o código foi compilado
+    QuebraLinha();
 
     //Instanciando objetos de Artista e Musica. 5 objetos de cada tipo
     Artista artista1(1, "Bon Jovi");
@@ -21,21 +39,20 @@ int main(){
     Artista artista5(9, "Roupa Nova");
     Musica musica5(10, "Whisky a Go-Go", "Pop Rock", 248, &artista5);
 
-    //Adicionando objetos a uma LISTA SEQUENCIAL ORDENADA
-    //Adicionamos no início e no fim, para mostrar que não há diferença
-    ListaOrdenada listaEmOrdem;
-    listaEmOrdem.InserirNoInicio(&musica5);
-    listaEmOrdem.InserirNoInicio(&artista5);
-    listaEmOrdem.InserirNoInicio(&musica4);
-    listaEmOrdem.InserirNoFinal(&artista4);
-    listaEmOrdem.InserirNoFinal(&musica3);
-    listaEmOrdem.InserirNoFinal(&artista3);
-    listaEmOrdem.InserirNoInicio(&musica2);
-    listaEmOrdem.InserirNoFinal(&artista2);
-    listaEmOrdem.InserirNoInicio(&musica1);
-    listaEmOrdem.InserirNoFinal(&artista1);
+    //Criando um vetor com os objetos criados em ordem decrescente
+    Elemento* objetosCriados[] = {&musica5, &artista5, &musica4, &artista4, &musica3, &artista3, &musica2, &artista2, &musica1, &artista1};
+    int qtdObjetos = sizeof(objetosCriados) / sizeof(objetosCriados[0]); //Salva a quantidade de objetos criados
 
-    listaEmOrdem.Imprimir();
+    //Criando estruturas
+    ListaOrdenada listaEmOrdem; //Criando uma LISTA SEQUENCIAL ORDENADA
+    ListaNaoOrdenada listaBaguncada; //Criando uma LISTA SEQUENCIAL NÃO ORDENADA
+    
+    PreencherListaOrdenada(listaEmOrdem, objetosCriados, qtdObjetos); //Percorrendo o vetor com os objetos criados e adicionando a uma LISTA SEQUENCIAL ORDENADA
+    PreencherListaNaoOrdenada(listaBaguncada, objetosCriados, qtdObjetos); //Percorrendo o vetor com os objetos criados e adicionando a uma LISTA SEQUENCIAL NÃO ORDENADA
+
+    listaEmOrdem.Imprimir(); //Imprime a lista sequencial ordenada
+    QuebraLinha();
+    listaBaguncada.Imprimir(); //Imprime a lista sequencial NÃO ordenada
 
     return 0;
 }
