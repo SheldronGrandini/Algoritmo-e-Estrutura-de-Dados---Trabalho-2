@@ -79,6 +79,16 @@ bool ListaNaoOrdenada::AlterarPeloId(int id, Elemento* novoElemento) {
 int ListaNaoOrdenada::GetTamanho() const { return tamanho; }
 bool ListaNaoOrdenada::Vazia() const { return tamanho == 0; }
 
+Elemento* ListaNaoOrdenada::GetPrimeiro() const {
+    if (Vazia()) return nullptr;
+    return elementos[0];
+}
+
+Elemento* ListaNaoOrdenada::GetUltimo() const {
+    if (Vazia()) return nullptr;
+    return elementos[tamanho - 1];
+}
+
 void ListaNaoOrdenada::Imprimir() const {
     for (int i = 0; i < tamanho; i++) elementos[i]->ImprimirInfo();
 }

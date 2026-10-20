@@ -26,5 +26,7 @@ public:
     bool AlterarPeloId(int id, Elemento* novoElemento);
     int GetTamanho() const;
     bool Vazia() const;
+    Elemento* GetPrimeiro() const;
+    Elemento* GetUltimo() const;
     void Imprimir() const;
 };
