@@ -1,8 +1,10 @@
 #include "ArvoreBinariaBusca.h"
 #include <iostream>
+// Complexidade: O(1) - a árvore começa vazia, sem raiz.
 ArvoreBinariaBusca::ArvoreBinariaBusca():raiz(nullptr) {
 
 }
+// Complexidade: O(n) - percorre todos os nós uma vez, em pós-ordem.
 void ArvoreBinariaBusca::Limpar(No*n) {
     if(!n)return;
     Limpar(n->esq);
@@ -10,10 +12,12 @@ void ArvoreBinariaBusca::Limpar(No*n) {
     delete n;
 
 }
+// Complexidade: O(n) - libera a árvore recursivamente em pós-ordem (filhos antes do pai).
 ArvoreBinariaBusca::~ArvoreBinariaBusca() {
     Limpar(raiz);
 
 }
+// Complexidade: O(h) - desce até a posição de inserção. Balanceada O(log n), pior caso O(n).
 ArvoreBinariaBusca::No* ArvoreBinariaBusca::Inserir(No*n,Elemento*e,bool&ok) {
     if(!n) {
         ok=true;
@@ -26,6 +30,7 @@ ArvoreBinariaBusca::No* ArvoreBinariaBusca::Inserir(No*n,Elemento*e,bool&ok) {
     return n;
 
 }
+// Complexidade: O(h) - O(log n) em árvore balanceada, O(n) no pior caso (árvore degenerada).
 bool ArvoreBinariaBusca::Inserir(Elemento*e) {
     if(!e)return false;
     bool ok=false;
@@ -33,6 +38,7 @@ bool ArvoreBinariaBusca::Inserir(Elemento*e) {
     return ok;
 
 }
+// Complexidade: O(h) - O(log n) em árvore balanceada, O(n) no pior caso (árvore degenerada).
 Elemento* ArvoreBinariaBusca::Buscar(No*n,int id) {
     while(n) {
         if(id==n->dado->GetId())return n->dado;
@@ -42,10 +48,12 @@ Elemento* ArvoreBinariaBusca::Buscar(No*n,int id) {
     return nullptr;
 
 }
+// Complexidade: O(h) - O(log n) em árvore balanceada, O(n) no pior caso (árvore degenerada).
 Elemento* ArvoreBinariaBusca::BuscarPeloId(int id)const {
     return Buscar(raiz,id);
 
 }
+// Complexidade: O(h) - O(log n) em árvore balanceada, O(n) no pior caso (árvore degenerada).
 ArvoreBinariaBusca::No* ArvoreBinariaBusca::Remover(No*n,int id,bool&ok) {
     if(!n)return nullptr;
     if(id<n->dado->GetId())n->esq=Remover(n->esq,id,ok);
@@ -74,12 +82,14 @@ ArvoreBinariaBusca::No* ArvoreBinariaBusca::Remover(No*n,int id,bool&ok) {
     return n;
 
 }
+// Complexidade: O(h) - O(log n) em árvore balanceada, O(n) no pior caso (árvore degenerada).
 bool ArvoreBinariaBusca::RemoverPeloId(int id) {
     bool ok=false;
     raiz=Remover(raiz,id,ok);
     return ok;
 
 }
+// Complexidade: O(n) - visita todos os nós; a pilha de chamadas ocupa O(h).
 void ArvoreBinariaBusca::EmOrdem(No*n) {
     if(n) {
         EmOrdem(n->esq);
@@ -89,6 +99,7 @@ void ArvoreBinariaBusca::EmOrdem(No*n) {
     }
 
 }
+// Complexidade: O(n) - visita todos os nós; a pilha de chamadas ocupa O(h).
 void ArvoreBinariaBusca::PreOrdem(No*n) {
     if(n) {
         std::cout<<n->dado->GetId()<<' ';
@@ -98,6 +109,7 @@ void ArvoreBinariaBusca::PreOrdem(No*n) {
     }
 
 }
+// Complexidade: O(n) - visita todos os nós; a pilha de chamadas ocupa O(h).
 void ArvoreBinariaBusca::PosOrdem(No*n) {
     if(n) {
         PosOrdem(n->esq);
@@ -107,16 +119,19 @@ void ArvoreBinariaBusca::PosOrdem(No*n) {
     }
 
 }
+// Complexidade: O(n) - delega ao percurso recursivo, que visita todos os nós.
 void ArvoreBinariaBusca::emOrdem()const {
     EmOrdem(raiz);
     std::cout<<'\n';
 
 }
+// Complexidade: O(n) - delega ao percurso recursivo, que visita todos os nós.
 void ArvoreBinariaBusca::preOrdem()const {
     PreOrdem(raiz);
     std::cout<<'\n';
 
 }
+// Complexidade: O(n) - delega ao percurso recursivo, que visita todos os nós.
 void ArvoreBinariaBusca::posOrdem()const {
     PosOrdem(raiz);
     std::cout<<'\n';

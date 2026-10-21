@@ -2,6 +2,7 @@
 #include <queue>
 #include <algorithm>
 #include <functional>
+// Complexidade: O(V) - redimensiona a matriz de adjacência (V linhas) a cada novo vértice.
 bool Grafo::AdicionarVertice(int id) {
     if(indice.count(id))return false;
     int n=(int)ids.size();
@@ -15,6 +16,7 @@ bool Grafo::AdicionarVertice(int id) {
     return true;
 
 }
+// Complexidade: O(deg) - a matriz custa O(1), mas a lista de adjacência usa busca linear para evitar aresta duplicada.
 bool Grafo::AdicionarAresta(int a,int b) {
     if(!indice.count(a)||!indice.count(b)||a==b)return false;
     int i=indice[a],j=indice[b];
@@ -28,16 +30,19 @@ bool Grafo::AdicionarAresta(int a,int b) {
     return true;
 
 }
+// Complexidade: O(1) - acesso direto à célula da matriz de adjacência.
 bool Grafo::SaoVizinhos(int a,int b)const {
     auto i=indice.find(a),j=indice.find(b);
     return i!=indice.end()&&j!=indice.end()&&matriz[i->second][j->second];
 
 }
+// Complexidade: O(1) - retorna o tamanho da lista de vizinhos do vértice.
 int Grafo::Grau(int id)const {
     auto it=lista.find(id);
     return it==lista.end()?-1:(int)it->second.size();
 
 }
+// Complexidade: O(V + E) - cada vértice é enfileirado uma vez e cada aresta é percorrida uma vez.
 std::vector<int> Grafo::BuscaEmLargura(int inicio)const {
     std::vector<int> ordem;
     if(!indice.count(inicio))return ordem;
@@ -56,6 +61,7 @@ std::vector<int> Grafo::BuscaEmLargura(int inicio)const {
     return ordem;
 
 }
+// Complexidade: O(V + E) - cada vértice é visitado uma vez e cada aresta é percorrida uma vez.
 std::vector<int> Grafo::BuscaEmProfundidade(int inicio)const {
     std::vector<int> ordem;
     std::unordered_set<int>visto;
@@ -69,6 +75,7 @@ std::vector<int> Grafo::BuscaEmProfundidade(int inicio)const {
     return ordem;
 
 }
+// Complexidade: O(1) - retorna o tamanho do vetor de IDs.
 int Grafo::QuantidadeVertices()const {
     return (int)ids.size();
 

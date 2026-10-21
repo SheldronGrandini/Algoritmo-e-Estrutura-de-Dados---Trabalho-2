@@ -3,6 +3,7 @@
 using namespace std;
 
 // Construtor: aloca o vetor de ponteiros circular e inicializa os índices de controle
+// Complexidade: O(capacidade) - aloca o vetor de ponteiros com a capacidade informada.
 FilaCircular::FilaCircular(int capacidade) {
     this -> capacidade = (capacidade > 0) ? capacidade : 10;
     this -> inicio = 0;
@@ -12,6 +13,7 @@ FilaCircular::FilaCircular(int capacidade) {
 
 // Destrutor: desaloca o vetor de ponteiros da memória
 // Os objetos Elemento continuam sob responsabilidade de quem os instanciou (conforme README da Parte 2)
+// Complexidade: O(1) - desaloca o vetor de ponteiros (os objetos Elemento são de responsabilidade de quem os instanciou).
 FilaCircular::~FilaCircular() {
     delete[] this -> elementos;
 }

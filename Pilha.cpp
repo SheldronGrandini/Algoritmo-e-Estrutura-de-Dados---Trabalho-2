@@ -3,11 +3,13 @@
 using namespace std;
 
 // Construtor: inicializa a pilha definindo sua capacidade limite
+// Complexidade: O(1) - define apenas o limite de capacidade da pilha.
 Pilha::Pilha(int capacidadeMaxima) {
     this -> capacidadeMaxima = capacidadeMaxima;
 }
 
 // Destrutor: a memória da lista interna é gerenciada pelo destrutor de ListaNaoOrdenada
+// Complexidade: O(1) - a memória da lista interna é gerenciada pelo destrutor de ListaNaoOrdenada.
 Pilha::~Pilha() {}
 
 // Insere um novo elemento no topo da pilha

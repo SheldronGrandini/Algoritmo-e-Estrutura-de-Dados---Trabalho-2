@@ -1,9 +1,11 @@
 #include "ListaDuplamenteEncadeada.h"
 #include <iostream>
 
+// Complexidade: O(1) - inicializa os ponteiros de início/fim e o contador.
 ListaDuplamenteEncadeada::ListaDuplamenteEncadeada():inicio(nullptr),fim(nullptr),tamanho(0) {
 
 }
+// Complexidade: O(n) - percorre a lista liberando cada nó alocado.
 ListaDuplamenteEncadeada::~ListaDuplamenteEncadeada() {
     while(inicio) {
         No*n=inicio;
@@ -13,6 +15,7 @@ ListaDuplamenteEncadeada::~ListaDuplamenteEncadeada() {
     }
 
 }
+// Complexidade: O(1) - aloca o nó e religa os ponteiros ant e prox.
 bool ListaDuplamenteEncadeada::InserirNoInicio(Elemento*e) {
     if(!e)return false;
     No*n=new No(e);
@@ -24,6 +27,7 @@ bool ListaDuplamenteEncadeada::InserirNoInicio(Elemento*e) {
     return true;
 
 }
+// Complexidade: O(1) - a estrutura mantém o ponteiro "fim", dispensando percurso.
 bool ListaDuplamenteEncadeada::InserirNoFim(Elemento*e) {
     if(!e)return false;
     No*n=new No(e);
@@ -35,6 +39,7 @@ bool ListaDuplamenteEncadeada::InserirNoFim(Elemento*e) {
     return true;
 
 }
+// Complexidade: O(1) - desliga o nó do início, religa o ant do novo início e o apaga.
 Elemento* ListaDuplamenteEncadeada::RemoverPrimeiro() {
     if(!inicio)return nullptr;
     No*n=inicio;
@@ -47,6 +52,7 @@ Elemento* ListaDuplamenteEncadeada::RemoverPrimeiro() {
     return e;
 
 }
+// Complexidade: O(1) - o nó anterior é acessado direto por fim->ant, dispensando percurso.
 Elemento* ListaDuplamenteEncadeada::RemoverUltimo() {
     if(!fim)return nullptr;
     No*n=fim;
@@ -59,6 +65,7 @@ Elemento* ListaDuplamenteEncadeada::RemoverUltimo() {
     return e;
 
 }
+// Complexidade: O(n) - busca linear pelo ID e religação dos ponteiros vizinhos.
 bool ListaDuplamenteEncadeada::RemoverPeloId(int id) {
     for(No*p=inicio;p;p=p->prox)if(p->dado->GetId()==id) {
         if(p->ant)p->ant->prox=p->prox;
@@ -73,19 +80,23 @@ bool ListaDuplamenteEncadeada::RemoverPeloId(int id) {
     return false;
 
 }
+// Complexidade: O(n) - busca linear, percorre os nós sequencialmente.
 Elemento* ListaDuplamenteEncadeada::BuscarPeloId(int id)const {
     for(No*p=inicio;p;p=p->prox)if(p->dado->GetId()==id)return p->dado;
     return nullptr;
 
 }
+// Complexidade: O(1) - comparação do contador com zero.
 bool ListaDuplamenteEncadeada::Vazia()const {
     return tamanho==0;
 
 }
+// Complexidade: O(1) - retorna o contador mantido em memória.
 int ListaDuplamenteEncadeada::GetTamanho()const {
     return tamanho;
 
 }
+// Complexidade: O(n) - percorre todos os nós chamando ImprimirInfo (o custo real inclui a saída de tela).
 void ListaDuplamenteEncadeada::Imprimir() const {
     if (!inicio) {
         std::cout << "Lista vazia." << std::endl;

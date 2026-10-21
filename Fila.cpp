@@ -3,11 +3,13 @@
 using namespace std;
 
 // Construtor: inicializa a fila sequencial com uma capacidade máxima definida
+// Complexidade: O(1) - define apenas o limite de capacidade da fila.
 Fila::Fila(int capacidadeMaxima) {
     this -> capacidadeMaxima = capacidadeMaxima;
 }
 
 // Destrutor: a memória do vetor interno é gerenciada pela própria ListaNaoOrdenada
+// Complexidade: O(1) - a memória do vetor interno é gerenciada pela própria ListaNaoOrdenada.
 Fila::~Fila() {}
 
 // Insere um novo elemento no final da fila
