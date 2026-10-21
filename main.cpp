@@ -36,6 +36,7 @@ void TestarListaNaoOrdenada(Elemento* vetor[], int tamanho){
     lista.Imprimir(); //Imprime a lista sequencial NÃO ordenada
 }
 
+//Adiciona os objetos criados a uma fila e imprime ao desenfileirar
 void TestarFila(Elemento* vetor[], int tamanho) {
     Fila fila; //Cria a FILA
     
@@ -50,10 +51,50 @@ void TestarFila(Elemento* vetor[], int tamanho) {
     while(!fila.FilaVazia()){ 
         Elemento* frente = fila.ConsultarFrente();
         if (frente != nullptr) {
-            frente->ImprimirInfo();
+            frente->ImprimirInfo(); //Imprime o elemento que está na frente
             cout << "-" << endl;
         }
-        fila.Desenfileirar();
+        fila.Desenfileirar(); //Remove o primeiro elemento
+    }
+}
+
+//Adiciona os objetos criados a uma pilha e imprime ao desempilhar
+void TestarPilha(Elemento* vetor[], int tamanho) {
+    Pilha pilha; //Cria a Pilha
+    
+    cout << "--- Empilhando ---" << endl;
+    for(int i = 0; i < tamanho; i++){
+        pilha.Empilhar(vetor[i]);
+    }
+    
+    cout << "--- Desempilhando (LIFO) ---" << endl << endl;
+    while(!pilha.PilhaVazia()) { 
+        Elemento* topo = pilha.ConsultarTopo();
+        if (topo != nullptr) {
+            topo->ImprimirInfo(); //Imprime o elemento que está no topo
+            cout << "-" << endl;
+        }
+        pilha.Desempilhar(); //Remove de fato o elemento
+    }
+}
+
+//Adiciona os objetos criados a uma fila circular e imprime
+void TestarFilaCircular(Elemento* vetor[], int tamanho) {
+    FilaCircular fila; //Cria a fila
+    
+    cout << "--- Enfileirando Circular ---" << endl;
+    for(int i = 0; i < tamanho; i++){
+        fila.Enfileirar(vetor[i]);
+    }
+    
+    cout << "--- Desenfileirando Circular (FIFO O(1)) ---" << endl << endl;
+    while(!fila.FilaVazia()) { 
+        Elemento* frente = fila.ConsultarFrente();
+        if (frente != nullptr) {
+            frente->ImprimirInfo(); //Imprime ao desenfileirar
+            cout << "-" << endl;
+        }
+        fila.Desenfileirar(); //Remove o elemento
     }
 }
 
@@ -83,7 +124,9 @@ int main(){
         cout << "1 - Testar Lista Sequencial Ordenada" << endl;
         cout << "2 - Testar Lista Sequencial Nao Ordenada" << endl;
         cout << "3 - Testar Fila Sequencial" << endl;
-        // Adicione as futuras estruturas aqui (Pilha, Fila, Arvore, etc.)
+        cout << "4 - Testar Pilha Sequencial" << endl;
+        cout << "5 - Testar Fila Circular Sequencial" << endl;
+        
         cout << "0 - Sair" << endl;
         cout << "Sua opcao: ";
         cin >> opcao;
@@ -108,12 +151,12 @@ int main(){
             }
             case 4: {
                 cout << "[Testando Pilha Sequencial]" << endl;
-                TestarFila(objetosCriados, qtdObjetos);
+                TestarPilha(objetosCriados, qtdObjetos);
                 break;
             }
             case 5: {
                 cout << "[Testando Fila Circular Sequencial]" << endl;
-                TestarFila(objetosCriados, qtdObjetos);
+                TestarFilaCircular(objetosCriados, qtdObjetos);
                 break;
             }
             case 0:
