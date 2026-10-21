@@ -90,5 +90,8 @@ Elemento* ListaNaoOrdenada::GetUltimo() const {
 }
 
 void ListaNaoOrdenada::Imprimir() const {
-    for (int i = 0; i < tamanho; i++) elementos[i]->ImprimirInfo();
+    for (int i = 0; i < tamanho; i++){ 
+        elementos[i]->ImprimirInfo();
+        cout << endl;
+    }
 }

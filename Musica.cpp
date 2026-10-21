@@ -36,9 +36,9 @@ Artista* Musica::GetCantor() const{
 //Método para mostrar as informações da Música (id, nome, gênero, duração, artista associado)
 //Removemos o Musica::Get... para simplificar o código, uma vez que o compilador já reconhece a classe atual
 void Musica::ImprimirInfo() const {
-    cout << "O id da música é " << GetId() << endl;
-    cout << "O nome da música é " << GetNome() << endl;
-    cout << "O gênero da música é " << GetGenero() << endl;
-    cout << "A duração da música em segundos é " << GetDuracao() << endl;
-    cout << "O artista que canta a música é " << GetCantor() -> GetNome() << endl; //Foi necessário utilizar GetNome(), pois o método GetCantor() retorna o "objeto inteiro".
+    cout << "O id da musica e " << GetId() << endl;
+    cout << "O nome da musica e " << GetNome() << endl;
+    cout << "O genero da musica e " << GetGenero() << endl;
+    cout << "A duracao da musica em segundos e " << GetDuracao() << endl;
+    cout << "O artista que canta a musica e " << GetCantor() -> GetNome() << endl; //Foi necessário utilizar GetNome(), pois o método GetCantor() retorna o "objeto inteiro".
 }                                                                                  //De modo que o dado mostrado seria o enderço do objeto Artista associado.
