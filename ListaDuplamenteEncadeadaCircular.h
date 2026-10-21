@@ -24,6 +24,8 @@ private:
      Elemento* RemoverUltimo();
      bool RemoverPeloId(int);
      Elemento* BuscarPeloId(int) const;
+     Elemento* GetPrimeiro() const;
+     Elemento* GetUltimo() const;
      bool Vazia() const;
      int GetTamanho() const;
 

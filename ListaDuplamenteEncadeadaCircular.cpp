@@ -1,13 +1,16 @@
 #include "ListaDuplamenteEncadeadaCircular.h"
 #include <iostream>
 
+// Complexidade: O(1) - inicializa o ponteiro de início e o contador.
 ListaDuplamenteEncadeadaCircular::ListaDuplamenteEncadeadaCircular():inicio(nullptr),tamanho(0) {
 
 }
+// Complexidade: O(n) - remove os nós um a um, reaproveitando a lógica de religação dos ponteiros.
 ListaDuplamenteEncadeadaCircular::~ListaDuplamenteEncadeadaCircular() {
     while(tamanho)RemoverPrimeiro();
 
 }
+// Complexidade: O(1) - aloca o nó e religa os ponteiros ant e prox no ciclo.
 bool ListaDuplamenteEncadeadaCircular::InserirNoInicio(Elemento*e) {
     if(!e)return false;
     No*n=new No(e);
@@ -25,6 +28,7 @@ bool ListaDuplamenteEncadeadaCircular::InserirNoInicio(Elemento*e) {
     return true;
 
 }
+// Complexidade: O(1) - insere antes do início e atualiza inicio->ant para o novo nó.
 bool ListaDuplamenteEncadeadaCircular::InserirNoFim(Elemento*e) {
     if(!e)return false;
     if(!inicio) {
@@ -43,6 +47,7 @@ bool ListaDuplamenteEncadeadaCircular::InserirNoFim(Elemento*e) {
     return true;
 
 }
+// Complexidade: O(1) - desliga o nó do início do ciclo e o apaga.
 Elemento* ListaDuplamenteEncadeadaCircular::RemoverPrimeiro() {
     if(!inicio)return nullptr;
     No*n=inicio;
@@ -59,6 +64,7 @@ Elemento* ListaDuplamenteEncadeadaCircular::RemoverPrimeiro() {
     return e;
 
 }
+// Complexidade: O(1) - o último nó é inicio->ant, acessado diretamente.
 Elemento* ListaDuplamenteEncadeadaCircular::RemoverUltimo() {
     if(!inicio)return nullptr;
     return tamanho==1?RemoverPrimeiro():([&]() {
@@ -66,6 +72,7 @@ Elemento* ListaDuplamenteEncadeadaCircular::RemoverUltimo() {
     })();
 
 }
+// Complexidade: O(n) - busca linear percorrendo o ciclo até o ID (ou até voltar ao início).
 bool ListaDuplamenteEncadeadaCircular::RemoverPeloId(int id) {
     if(!inicio)return false;
     No*p=inicio;
@@ -87,6 +94,7 @@ bool ListaDuplamenteEncadeadaCircular::RemoverPeloId(int id) {
     return false;
 
 }
+// Complexidade: O(n) - busca linear percorrendo o ciclo até o ID (ou até voltar ao início).
 Elemento* ListaDuplamenteEncadeadaCircular::BuscarPeloId(int id)const {
     if(!inicio)return nullptr;
     No*p=inicio;
@@ -99,14 +107,27 @@ Elemento* ListaDuplamenteEncadeadaCircular::BuscarPeloId(int id)const {
     return nullptr;
 
 }
+// Complexidade: O(1) - o nó inicial sempre aponta direto para o primeiro elemento.
+Elemento* ListaDuplamenteEncadeadaCircular::GetPrimeiro()const {
+    return inicio?inicio->dado:nullptr;
+
+}
+// Complexidade: O(1) - em uma lista circular o último nó é sempre inicio->ant.
+Elemento* ListaDuplamenteEncadeadaCircular::GetUltimo()const {
+    return inicio?inicio->ant->dado:nullptr;
+
+}
+// Complexidade: O(1) - comparação do contador com zero.
 bool ListaDuplamenteEncadeadaCircular::Vazia()const {
     return tamanho==0;
 
 }
+// Complexidade: O(1) - retorna o contador mantido em memória.
 int ListaDuplamenteEncadeadaCircular::GetTamanho()const {
     return tamanho;
 
 }
+// Complexidade: O(n) - percorre o ciclo uma vez chamando ImprimirInfo (o custo real inclui a saída de tela).
 void ListaDuplamenteEncadeadaCircular::Imprimir() const {
     if (!inicio) {
         std::cout << "Lista vazia." << std::endl;

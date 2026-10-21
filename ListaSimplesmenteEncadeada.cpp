@@ -1,9 +1,11 @@
 #include "ListaSimplesmenteEncadeada.h"
 #include <iostream>
 
+// Complexidade: O(1) - inicializa os ponteiros de início/fim e o contador.
 ListaSimplesmenteEncadeada::ListaSimplesmenteEncadeada():inicio(nullptr),fim(nullptr),tamanho(0) {
 
 }
+// Complexidade: O(n) - percorre a lista liberando cada nó alocado.
 ListaSimplesmenteEncadeada::~ListaSimplesmenteEncadeada() {
     while(inicio) {
         No* n=inicio;
@@ -13,6 +15,7 @@ ListaSimplesmenteEncadeada::~ListaSimplesmenteEncadeada() {
     }
 
 }
+// Complexidade: O(1) - aloca o nó e religa o ponteiro prox ao início anterior.
 bool ListaSimplesmenteEncadeada::InserirNoInicio(Elemento* e) {
     if(!e)return false;
     No*n=new No(e);
@@ -23,6 +26,7 @@ bool ListaSimplesmenteEncadeada::InserirNoInicio(Elemento* e) {
     return true;
 
 }
+// Complexidade: O(1) - a estrutura mantém o ponteiro "fim", dispensando percurso.
 bool ListaSimplesmenteEncadeada::InserirNoFim(Elemento* e) {
     if(!e)return false;
     No*n=new No(e);
@@ -33,6 +37,7 @@ bool ListaSimplesmenteEncadeada::InserirNoFim(Elemento* e) {
     return true;
 
 }
+// Complexidade: O(1) - desliga o nó do início e o apaga.
 Elemento* ListaSimplesmenteEncadeada::RemoverPrimeiro() {
     if(!inicio)return nullptr;
     No*n=inicio;
@@ -44,6 +49,7 @@ Elemento* ListaSimplesmenteEncadeada::RemoverPrimeiro() {
     return e;
 
 }
+// Complexidade: O(n) - é necessário percorrer até o penúltimo nó para poder religar o ponteiro prox.
 Elemento* ListaSimplesmenteEncadeada::RemoverUltimo() {
     if(!inicio)return nullptr;
     if(inicio==fim)return RemoverPrimeiro();
@@ -57,6 +63,7 @@ Elemento* ListaSimplesmenteEncadeada::RemoverUltimo() {
     return e;
 
 }
+// Complexidade: O(n) - busca linear pelo ID e religação dos ponteiros vizinhos.
 bool ListaSimplesmenteEncadeada::RemoverPeloId(int id) {
     No*p=inicio,*ant=nullptr;
     while(p&&p->dado->GetId()!=id) {
@@ -73,19 +80,33 @@ bool ListaSimplesmenteEncadeada::RemoverPeloId(int id) {
     return true;
 
 }
+// Complexidade: O(n) - busca linear, percorre os nós sequencialmente.
 Elemento* ListaSimplesmenteEncadeada::BuscarPeloId(int id)const {
     for(No*p=inicio;p;p=p->prox)if(p->dado->GetId()==id)return p->dado;
     return nullptr;
 
 }
+// Complexidade: O(1) - acesso direto ao ponteiro do início da lista.
+Elemento* ListaSimplesmenteEncadeada::GetPrimeiro()const {
+    return inicio?inicio->dado:nullptr;
+
+}
+// Complexidade: O(1) - acesso direto ao ponteiro do fim da lista.
+Elemento* ListaSimplesmenteEncadeada::GetUltimo()const {
+    return fim?fim->dado:nullptr;
+
+}
+// Complexidade: O(1) - comparação do contador com zero.
 bool ListaSimplesmenteEncadeada::Vazia()const {
     return tamanho==0;
 
 }
+// Complexidade: O(1) - retorna o contador mantido em memória.
 int ListaSimplesmenteEncadeada::GetTamanho()const {
     return tamanho;
 
 }
+// Complexidade: O(n) - percorre todos os nós chamando ImprimirInfo (o custo real inclui a saída de tela).
 void ListaSimplesmenteEncadeada::Imprimir() const {
     if (!inicio) {
         std::cout << "Lista vazia." << std::endl;
