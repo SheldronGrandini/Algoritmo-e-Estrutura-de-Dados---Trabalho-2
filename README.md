@@ -197,13 +197,13 @@ As classes e os tipos auxiliares do projeto — incluindo `Elemento`, `Artista` 
 
 ## 10. Compilação e execução
 
-A compilação depende da organização dos arquivos e da existência de um ponto de entrada (`main`). Se o projeto possuir vários arquivos-fonte, compile-os em conjunto e inclua os cabeçalhos necessários. Exemplo genérico com um compilador compatível com C++11:
+Todos os arquivos-fonte (`.cpp`) do projeto são compilados em conjunto com um compilador compatível com C++11:
 
 ```bash
 g++ -std=c++11 *.cpp -o trabalho
 ```
 
-Execute o comando na pasta correta do projeto. Caso existam vários arquivos com função `main`, ou se os arquivos dependerem de fontes do projeto-base, será necessário ajustar a lista de arquivos compilados.
+Execute o comando na pasta que contém os arquivos `.cpp` e `.h`.
 
 O `main.cpp` abre um menu interativo com uma opção de teste para cada estrutura implementada:
 
