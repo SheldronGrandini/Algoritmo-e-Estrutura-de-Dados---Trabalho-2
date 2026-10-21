@@ -87,5 +87,8 @@ int ListaOrdenada::GetTamanho() const { return tamanho; }
 bool ListaOrdenada::Vazia() const { return tamanho == 0; }
 
 void ListaOrdenada::Imprimir() const {
-    for (int i = 0; i < tamanho; i++) elementos[i]->ImprimirInfo();
+    for (int i = 0; i < tamanho; i++){
+        elementos[i]->ImprimirInfo();
+        cout << endl;
+    } 
 }

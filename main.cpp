@@ -6,7 +6,7 @@ using namespace std;
 #include "ListaNaoOrdenada.h"
 
 void QuebraLinha(){
-    cout << endl << "=============================" << endl << endl;
+    cout << endl << "==========================================" << endl << endl;
 }
 
 //Adiciona os objetos criados a uma lista sequencial ordenada
@@ -23,9 +23,9 @@ void PreencherListaNaoOrdenada(ListaNaoOrdenada& lista, Elemento* vetor[], int t
     }
 }
 
+// FALAR DE REFERENCIAS NO README (USADAS NAS FUNÇÕES ACIMA "ListaOrdenada&")
 int main(){
     cout << "Arquivos compilados!" << endl; //Print para confirmar que o código foi compilado
-    QuebraLinha();
 
     //Instanciando objetos de Artista e Musica. 5 objetos de cada tipo
     Artista artista1(1, "Bon Jovi");
@@ -43,16 +43,45 @@ int main(){
     Elemento* objetosCriados[] = {&musica5, &artista5, &musica4, &artista4, &musica3, &artista3, &musica2, &artista2, &musica1, &artista1};
     int qtdObjetos = sizeof(objetosCriados) / sizeof(objetosCriados[0]); //Salva a quantidade de objetos criados
 
-    //Criando estruturas
-    ListaOrdenada listaEmOrdem; //Criando uma LISTA SEQUENCIAL ORDENADA
-    ListaNaoOrdenada listaBaguncada; //Criando uma LISTA SEQUENCIAL NÃO ORDENADA
-    
-    PreencherListaOrdenada(listaEmOrdem, objetosCriados, qtdObjetos); //Percorrendo o vetor com os objetos criados e adicionando a uma LISTA SEQUENCIAL ORDENADA
-    PreencherListaNaoOrdenada(listaBaguncada, objetosCriados, qtdObjetos); //Percorrendo o vetor com os objetos criados e adicionando a uma LISTA SEQUENCIAL NÃO ORDENADA
+    int opcao = 1;
+    while (opcao != 0){
+        QuebraLinha();
+        cout << "Escolha o que deseja testar:" << endl;
+        cout << "1 - Testar Lista Sequencial Ordenada" << endl;
+        cout << "2 - Testar Lista Sequencial Nao Ordenada" << endl;
+        // Adicione as futuras estruturas aqui (Pilha, Fila, Arvore, etc.)
+        cout << "0 - Sair" << endl;
+        cout << "Sua opcao: ";
+        cin >> opcao;
 
-    listaEmOrdem.Imprimir(); //Imprime a lista sequencial ordenada
-    QuebraLinha();
-    listaBaguncada.Imprimir(); //Imprime a lista sequencial NÃO ordenada
+        QuebraLinha();
+
+        switch (opcao) {
+            case 1: {
+                cout << "[Testando Lista Ordenada]" << endl << endl;
+                
+                ListaOrdenada listaEmOrdem; //Criando uma LISTA SEQUENCIAL ORDENADA
+                PreencherListaOrdenada(listaEmOrdem, objetosCriados, qtdObjetos); //Percorrendo o vetor com os objetos criados e adicionando a uma LISTA SEQUENCIAL ORDENADA
+                listaEmOrdem.Imprimir(); //Imprime a lista sequencial ordenada
+                
+                break;
+            }
+            case 2: {
+                cout << "[Testando Lista Nao Ordenada]" << endl;
+
+                ListaNaoOrdenada listaBaguncada; //Criando uma LISTA SEQUENCIAL NÃO ORDENADA
+                PreencherListaNaoOrdenada(listaBaguncada, objetosCriados, qtdObjetos); //Percorrendo o vetor com os objetos criados e adicionando a uma LISTA SEQUENCIAL NÃO ORDENADA
+                listaBaguncada.Imprimir(); //Imprime a lista sequencial NÃO ordenada
+                
+                break;
+            }
+            case 0:
+                cout << "Programa encerrado!" << endl;
+                break;
+            default:
+                cout << "Opcao invalida! Tente novamente." << endl;
+        }
+    }
 
     return 0;
 }
