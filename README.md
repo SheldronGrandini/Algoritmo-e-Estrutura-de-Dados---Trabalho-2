@@ -1,6 +1,6 @@
-# Trabalho 2 — Algoritmos e Estruturas de Dados
+# Trabalho 2 — Algoritmo e Estrutura de Dados
 
-**Disciplina:** Engenharia de Sistemas de Dados  
+**Disciplina:** Algoritmo e Estrutura de Dados  
 **Linguagem de programação:** C++  
 **Integrantes do grupo:** Sheldron Grandini, Gabriel Woyames e Geliel Pereira
 
