@@ -12,6 +12,9 @@ using namespace std;
 #include "ListaSimplesmenteEncadeada.h"
 #include "ArvoreBinariaBusca.h"
 #include "Grafo.h"
+#include "PilhaEncadeada.h"
+#include "FilaEncadeada.h"
+#include "Deque.h"
 #include <vector> // Necessário para receber o retorno das buscas do Grafo
 
 void QuebraLinha(){
@@ -257,6 +260,81 @@ void TestarGrafo(Elemento* vetor[], int tamanho) {
     cout << endl;
 }
 
+//Adiciona os objetos criados a uma pilha encadeada e imprime ao desempilhar
+void TestarPilhaEncadeada(Elemento* vetor[], int tamanho) {
+    PilhaEncadeada pilha; //Cria a Pilha Encadeada
+
+    cout << "--- Empilhando (Encadeada) ---" << endl;
+    for(int i = 0; i < tamanho; i++){
+        pilha.Empilhar(vetor[i]);
+    }
+
+    cout << "--- Desempilhando (LIFO) ---" << endl << endl;
+    while(!pilha.PilhaVazia()) {
+        Elemento* topo = pilha.ConsultarTopo();
+        if (topo != nullptr) {
+            topo->ImprimirInfo();
+            cout << "-" << endl;
+        }
+        pilha.Desempilhar();
+    }
+}
+
+//Adiciona os objetos criados a uma fila encadeada e imprime ao desenfileirar
+void TestarFilaEncadeada(Elemento* vetor[], int tamanho) {
+    FilaEncadeada fila; //Cria a Fila Encadeada
+
+    cout << "--- Enfileirando (Encadeada) ---" << endl;
+    for(int i = 0; i < tamanho; i++){
+        fila.Enfileirar(vetor[i]);
+    }
+
+    cout << "--- Desenfileirando (FIFO O(1)) ---" << endl << endl;
+    while(!fila.FilaVazia()) {
+        Elemento* frente = fila.ConsultarFrente();
+        if (frente != nullptr) {
+            frente->ImprimirInfo();
+            cout << "-" << endl;
+        }
+        fila.Desenfileirar();
+    }
+}
+
+//Demonstra o Deque: insere alternadamente nas duas pontas e remove das duas pontas
+void TestarDeque(Elemento* vetor[], int tamanho) {
+    Deque deque; //Cria o Deque
+
+    cout << "--- Inserindo metade no Início e metade no Final ---" << endl;
+    for(int i = 0; i < tamanho; i++){
+        if (i % 2 == 0) {
+            deque.InserirNoInicio(vetor[i]);
+        } else {
+            deque.InserirNoFinal(vetor[i]);
+        }
+    }
+
+    cout << endl << "--- Estado Inicial do Deque ---" << endl << endl;
+    deque.Imprimir();
+
+    cout << endl << "--- Removendo do Início e do Final alternadamente ---" << endl << endl;
+    while(!deque.Vazia()){
+        Elemento* removidoInicio = deque.RemoverInicio();
+        if (removidoInicio != nullptr) {
+            cout << "Removido do inicio: ";
+            removidoInicio->ImprimirInfo();
+        }
+        Elemento* removidoFinal = deque.RemoverFinal();
+        if (removidoFinal != nullptr) {
+            cout << "Removido do final: ";
+            removidoFinal->ImprimirInfo();
+        }
+        cout << "-" << endl;
+    }
+
+    cout << endl << "--- Estado Final do Deque ---" << endl << endl;
+    deque.Imprimir();
+}
+
 int main(){
     cout << "Arquivos compilados!" << endl; //Print para confirmar que o código foi compilado
 
@@ -291,6 +369,9 @@ int main(){
         cout << "8 - Testar Lista Duplamente Encadeada Circular" << endl;
         cout << "9 - Testar Arvore Binaria de Busca" << endl;
         cout << "10 - Testar Grafo" << endl;
+        cout << "11 - Testar Pilha Encadeada" << endl;
+        cout << "12 - Testar Fila Encadeada" << endl;
+        cout << "13 - Testar Deque" << endl;
 
         cout << "0 - Sair" << endl;
         cout << "Sua opcao: ";
@@ -347,6 +428,21 @@ int main(){
             case 10: {
                 cout << "[Testando Grafo]" << endl;
                 TestarGrafo(objetosCriados, qtdObjetos);
+                break;
+            }
+            case 11: {
+                cout << "[Testando Pilha Encadeada]" << endl;
+                TestarPilhaEncadeada(objetosCriados, qtdObjetos);
+                break;
+            }
+            case 12: {
+                cout << "[Testando Fila Encadeada]" << endl;
+                TestarFilaEncadeada(objetosCriados, qtdObjetos);
+                break;
+            }
+            case 13: {
+                cout << "[Testando Deque]" << endl;
+                TestarDeque(objetosCriados, qtdObjetos);
                 break;
             }
             case 0:
