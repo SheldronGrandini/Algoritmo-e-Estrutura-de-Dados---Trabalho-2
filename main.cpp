@@ -10,6 +10,9 @@ using namespace std;
 #include "ListaDuplamenteEncadeada.h"
 #include "ListaDuplamenteEncadeadaCircular.h"
 #include "ListaSimplesmenteEncadeada.h"
+#include "ArvoreBinariaBusca.h"
+#include "Grafo.h"
+#include <vector> // Necessário para receber o retorno das buscas do Grafo
 
 void QuebraLinha(){
     cout << endl << "==========================================" << endl << endl;
@@ -176,6 +179,84 @@ void TestarListaDuplamenteEncadeadaCircular(Elemento* vetor[], int tamanho) {
     lista.Imprimir();
 }
 
+//Adiciona os objetos criados a uma árvore binária de busca e testa seus percursos e metodos
+void TestarArvoreBinariaBusca(Elemento* vetor[], int tamanho) {
+    ArvoreBinariaBusca arvore; //Cria a arvore binaria de busca
+    
+    cout << "--- Inserindo na Arvore Binaria de Busca ---" << endl;
+    for(int i = 0; i < tamanho; i++){
+        arvore.Inserir(vetor[i]);
+    }
+    
+    //O percurso em ordem deve imprimir os IDs em ordem crescente
+    cout << endl << "--- Percurso Em Ordem (IDs Crescentes) ---" << endl;
+    arvore.emOrdem();
+    
+    cout << endl << "--- Percurso Pre-Ordem ---" << endl;
+    arvore.preOrdem();
+    
+    cout << endl << "--- Percurso Pos-Ordem ---" << endl;
+    arvore.posOrdem();
+    
+    cout << endl << "--- Testando Busca ---" << endl;
+
+    //Pega o ID do primeiro elemento do vetor como cobaia
+    int idTeste = vetor[0]->GetId(); 
+    Elemento* buscado = arvore.BuscarPeloId(idTeste); 
+    if (buscado != nullptr) {
+        cout << "Elemento encontrado no ID " << idTeste << ":" << endl;
+        buscado->ImprimirInfo();
+    }
+    
+    cout << endl << "--- Testando Remocao ---" << endl;
+    if (arvore.RemoverPeloId(idTeste)) {
+        cout << "Elemento ID " << idTeste << " removido com sucesso da arvore." << endl;
+    }
+}
+
+//Adiciona os IDs a um grafo, cria conexoes e realiza buscas em largura e profundidade
+void TestarGrafo(Elemento* vetor[], int tamanho) {
+    Grafo grafo; //Cria o grafo
+    
+    cout << "--- Adicionando Vertices no Grafo ---" << endl;
+    for(int i = 0; i < tamanho; i++){
+        grafo.AdicionarVertice(vetor[i]->GetId()); //O Grafo recebe o ID (int) e nao o objeto Elemento
+    }
+    
+    cout << "--- Criando Arestas (Conexoes Ficticias) ---" << endl;
+    if(tamanho >= 4) {
+
+        //Ligando o primeiro elemento ao segundo e terceiro, e o segundo ao quarto
+        grafo.AdicionarAresta(vetor[0]->GetId(), vetor[1]->GetId());
+        grafo.AdicionarAresta(vetor[0]->GetId(), vetor[2]->GetId());
+        grafo.AdicionarAresta(vetor[1]->GetId(), vetor[3]->GetId());
+        cout << "Arestas criadas com sucesso." << endl;
+    }
+    
+    cout << endl << "--- Testando Informacoes do Grafo ---" << endl;
+    if(tamanho >= 2) {
+        cout << "Grau do vertice ID " << vetor[0]->GetId() << ": " << grafo.Grau(vetor[0]->GetId()) << endl;
+        cout << "ID " << vetor[0]->GetId() << " e ID " << vetor[1]->GetId() << " sao vizinhos? "
+             << (grafo.SaoVizinhos(vetor[0]->GetId(), vetor[1]->GetId()) ? "Sim" : "Nao") << endl;
+    }
+    
+    cout << endl << "--- Busca em Largura (BFS) a partir do ID " << vetor[0]->GetId() << " ---" << endl;
+    vector<int> bfs = grafo.BuscaEmLargura(vetor[0]->GetId());
+    cout << "Caminho BFS: ";
+    for(int id : bfs) {
+        cout << id << " ";
+    }
+    cout << endl;
+    
+    cout << endl << "--- Busca em Profundidade (DFS) a partir do ID " << vetor[0]->GetId() << " ---" << endl;
+    vector<int> dfs = grafo.BuscaEmProfundidade(vetor[0]->GetId());
+    cout << "Caminho DFS: ";
+    for(int id : dfs) {
+        cout << id << " ";
+    }
+    cout << endl;
+}
+
 int main(){
     cout << "Arquivos compilados!" << endl; //Print para confirmar que o código foi compilado
 
@@ -199,6 +280,7 @@ int main(){
     while (opcao != 0){
         QuebraLinha();
         cout << "Escolha o que deseja testar:" << endl;
+
         cout << "1 - Testar Lista Sequencial Ordenada" << endl;
         cout << "2 - Testar Lista Sequencial Nao Ordenada" << endl;
         cout << "3 - Testar Fila Sequencial" << endl;
@@ -207,7 +289,9 @@ int main(){
         cout << "6 - Testar Lista Simplesmente Encadeada" << endl;
         cout << "7 - Testar Lista Duplamente Encadeada" << endl;
         cout << "8 - Testar Lista Duplamente Encadeada Circular" << endl;
-        
+        cout << "9 - Testar Arvore Binaria de Busca" << endl;
+        cout << "10 - Testar Grafo" << endl;
+
         cout << "0 - Sair" << endl;
         cout << "Sua opcao: ";
         cin >> opcao;
@@ -253,6 +337,16 @@ int main(){
             case 8: {
                 cout << "[Testando Lista Duplamente Enc. Circular]" << endl;
                 TestarListaDuplamenteEncadeadaCircular(objetosCriados, qtdObjetos);
+                break;
+            }
+            case 9: {
+                cout << "[Testando Arvore Binaria de Busca]" << endl;
+                TestarArvoreBinariaBusca(objetosCriados, qtdObjetos);
+                break;
+            }
+            case 10: {
+                cout << "[Testando Grafo]" << endl;
+                TestarGrafo(objetosCriados, qtdObjetos);
                 break;
             }
             case 0:
