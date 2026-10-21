@@ -7,6 +7,9 @@ using namespace std;
 #include "Fila.h"
 #include "Pilha.h"
 #include "FilaCircular.h"
+#include "ListaDuplamenteEncadeada.h"
+#include "ListaDuplamenteEncadeadaCircular.h"
+#include "ListaSimplesmenteEncadeada.h"
 
 void QuebraLinha(){
     cout << endl << "==========================================" << endl << endl;
@@ -98,6 +101,81 @@ void TestarFilaCircular(Elemento* vetor[], int tamanho) {
     }
 }
 
+//Adiciona os objetos criados a uma lista simplesmente encadeada e imprime ao remover
+void TestarListaSimplesmenteEncadeada(Elemento* vetor[], int tamanho) {
+    ListaSimplesmenteEncadeada lista; //Cria lista simplesmente encadeada
+    
+    cout << "--- Inserindo Metade no Inicio e Metade no Fim ---" << endl;
+    for(int i = 0; i < tamanho; i++){
+        if (i < tamanho / 2) {
+            lista.InserirNoInicio(vetor[i]);
+        } else {
+            lista.InserirNoFim(vetor[i]);
+        }
+    }
+    
+    //Faz uma remoção para testar os ponteiros
+    cout << "--- Removendo o Primeiro Elemento ---" << endl << endl;
+    Elemento* removido = lista.RemoverPrimeiro();
+    if(removido != nullptr) {
+        cout << "Removido: ";
+        removido->ImprimirInfo();
+    }
+    
+    cout << endl << "--- Estado Final da Lista ---" << endl << endl;
+    lista.Imprimir();
+}
+
+//Adiciona os objetos criados a uma lista duplamente encadeada e imprime ao remover
+void TestarListaDuplamenteEncadeada(Elemento* vetor[], int tamanho) {
+    ListaDuplamenteEncadeada lista; //Cria a lista duplamente encadeada
+    
+    cout << "--- Inserindo Metade no Inicio e Metade no Fim ---" << endl;
+    for(int i = 0; i < tamanho; i++){
+        if (i < tamanho / 2) {
+            lista.InserirNoInicio(vetor[i]);
+        } else {
+            lista.InserirNoFim(vetor[i]);
+        }
+    }
+    
+    //Faz uma remoção para testar os ponteiros
+    cout << "--- Removendo o Primeiro Elemento ---" << endl << endl;
+    Elemento* removido = lista.RemoverPrimeiro();
+    if(removido != nullptr) {
+        cout << "Removido: ";
+        removido->ImprimirInfo();
+    }
+    
+    cout << endl << "--- Estado Final da Lista ---" << endl << endl;
+    lista.Imprimir();
+}
+
+//Adiciona os objetos criados a uma lista duplamente encadeada circular e imprime ao remover
+void TestarListaDuplamenteEncadeadaCircular(Elemento* vetor[], int tamanho) {
+    ListaDuplamenteEncadeadaCircular lista; //Cria a lista duplamente encadeada circular
+    
+    cout << "--- Inserindo Metade no Inicio e Metade no Fim ---" << endl;
+    for(int i = 0; i < tamanho; i++){
+        if (i < tamanho / 2) {
+            lista.InserirNoInicio(vetor[i]);
+        } else {
+            lista.InserirNoFim(vetor[i]);
+        }
+    }
+    
+    //Faz uma remoção para testar os ponteiros
+    cout << "--- Removendo o Primeiro Elemento ---" << endl << endl;
+    Elemento* removido = lista.RemoverPrimeiro();
+    if(removido != nullptr) {
+        cout << "Removido: ";
+        removido->ImprimirInfo();
+    }
+    
+    cout << endl << "--- Estado Final da Lista ---" << endl << endl;
+    lista.Imprimir();
+}
+
 int main(){
     cout << "Arquivos compilados!" << endl; //Print para confirmar que o código foi compilado
 
@@ -126,6 +204,9 @@ int main(){
         cout << "3 - Testar Fila Sequencial" << endl;
         cout << "4 - Testar Pilha Sequencial" << endl;
         cout << "5 - Testar Fila Circular Sequencial" << endl;
+        cout << "6 - Testar Lista Simplesmente Encadeada" << endl;
+        cout << "7 - Testar Lista Duplamente Encadeada" << endl;
+        cout << "8 - Testar Lista Duplamente Encadeada Circular" << endl;
         
         cout << "0 - Sair" << endl;
         cout << "Sua opcao: ";
@@ -157,6 +238,21 @@ int main(){
             case 5: {
                 cout << "[Testando Fila Circular Sequencial]" << endl;
                 TestarFilaCircular(objetosCriados, qtdObjetos);
+                break;
+            }
+            case 6: {
+                cout << "[Testando Lista Simplesmente Encadeada]" << endl;
+                TestarListaSimplesmenteEncadeada(objetosCriados, qtdObjetos);
+                break;
+            }
+            case 7: {
+                cout << "[Testando Lista Duplamente Encadeada]" << endl;
+                TestarListaDuplamenteEncadeada(objetosCriados, qtdObjetos);
+                break;
+            }
+            case 8: {
+                cout << "[Testando Lista Duplamente Enc. Circular]" << endl;
+                TestarListaDuplamenteEncadeadaCircular(objetosCriados, qtdObjetos);
                 break;
             }
             case 0:
