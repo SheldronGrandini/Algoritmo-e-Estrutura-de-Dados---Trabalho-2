@@ -4,26 +4,59 @@ using namespace std;
 #include "Musica.h"
 #include "ListaOrdenada.h"
 #include "ListaNaoOrdenada.h"
+#include "Fila.h"
+#include "Pilha.h"
+#include "FilaCircular.h"
 
 void QuebraLinha(){
     cout << endl << "==========================================" << endl << endl;
 }
 
-//Adiciona os objetos criados a uma lista sequencial ordenada
-void PreencherListaOrdenada(ListaOrdenada& lista, Elemento* vetor[], int tamanho){
+//Adiciona os objetos criados a uma lista sequencial ordenada e imprime a lista resultante
+void TestarListaOrdenada(Elemento* vetor[], int tamanho){
+    ListaOrdenada lista; //Criando uma LISTA SEQUENCIAL ORDENADA
+    
+    //Percorrendo o vetor com os objetos criados e adicionando a lista
     for(int i = 0; i < tamanho; i++){
         lista.InserirNoInicio(vetor[i]);
     }
+
+    lista.Imprimir(); //Imprime a lista
 }
 
-//Adiciona os objetos criados a uma lista sequencial não ordenada
-void PreencherListaNaoOrdenada(ListaNaoOrdenada& lista, Elemento* vetor[], int tamanho){
-        for(int i = 0; i < tamanho; i++){
+//Adiciona os objetos criados a uma lista sequencial não ordenada e imprime a lista resultante
+void TestarListaNaoOrdenada(Elemento* vetor[], int tamanho){
+    ListaNaoOrdenada lista; //Criando uma LISTA SEQUENCIAL NÃO ORDENADA
+
+    //Percorrendo o vetor com os objetos criados e adicionando a uma LISTA SEQUENCIAL NÃO ORDENADA
+    for(int i = 0; i < tamanho; i++){
         lista.InserirNoFinal(vetor[i]);
+    }
+
+    lista.Imprimir(); //Imprime a lista sequencial NÃO ordenada
+}
+
+void TestarFila(Elemento* vetor[], int tamanho) {
+    Fila fila; //Cria a FILA
+    
+    //Adiciona os objetos no iníco
+    cout << "--- Enfileirando ---" << endl;
+    for(int i = 0; i < tamanho; i++){
+        fila.Enfileirar(vetor[i]);
+    }
+    
+    //Remove os objetos no início
+    cout << "--- Desenfileirando (FIFO) ---" << endl << endl;
+    while(!fila.FilaVazia()){ 
+        Elemento* frente = fila.ConsultarFrente();
+        if (frente != nullptr) {
+            frente->ImprimirInfo();
+            cout << "-" << endl;
+        }
+        fila.Desenfileirar();
     }
 }
 
-// FALAR DE REFERENCIAS NO README (USADAS NAS FUNÇÕES ACIMA "ListaOrdenada&")
 int main(){
     cout << "Arquivos compilados!" << endl; //Print para confirmar que o código foi compilado
 
@@ -49,6 +82,7 @@ int main(){
         cout << "Escolha o que deseja testar:" << endl;
         cout << "1 - Testar Lista Sequencial Ordenada" << endl;
         cout << "2 - Testar Lista Sequencial Nao Ordenada" << endl;
+        cout << "3 - Testar Fila Sequencial" << endl;
         // Adicione as futuras estruturas aqui (Pilha, Fila, Arvore, etc.)
         cout << "0 - Sair" << endl;
         cout << "Sua opcao: ";
@@ -59,20 +93,27 @@ int main(){
         switch (opcao) {
             case 1: {
                 cout << "[Testando Lista Ordenada]" << endl << endl;
-                
-                ListaOrdenada listaEmOrdem; //Criando uma LISTA SEQUENCIAL ORDENADA
-                PreencherListaOrdenada(listaEmOrdem, objetosCriados, qtdObjetos); //Percorrendo o vetor com os objetos criados e adicionando a uma LISTA SEQUENCIAL ORDENADA
-                listaEmOrdem.Imprimir(); //Imprime a lista sequencial ordenada
-                
+                TestarListaOrdenada(objetosCriados, qtdObjetos); 
                 break;
             }
             case 2: {
                 cout << "[Testando Lista Nao Ordenada]" << endl;
-
-                ListaNaoOrdenada listaBaguncada; //Criando uma LISTA SEQUENCIAL NÃO ORDENADA
-                PreencherListaNaoOrdenada(listaBaguncada, objetosCriados, qtdObjetos); //Percorrendo o vetor com os objetos criados e adicionando a uma LISTA SEQUENCIAL NÃO ORDENADA
-                listaBaguncada.Imprimir(); //Imprime a lista sequencial NÃO ordenada
-                
+                TestarListaNaoOrdenada(objetosCriados, qtdObjetos);              
+                break;
+            }
+            case 3: {
+                cout << "[Testando Fila Sequencial]" << endl;
+                TestarFila(objetosCriados, qtdObjetos);
+                break;
+            }
+            case 4: {
+                cout << "[Testando Pilha Sequencial]" << endl;
+                TestarFila(objetosCriados, qtdObjetos);
+                break;
+            }
+            case 5: {
+                cout << "[Testando Fila Circular Sequencial]" << endl;
+                TestarFila(objetosCriados, qtdObjetos);
                 break;
             }
             case 0:
