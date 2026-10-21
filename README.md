@@ -22,8 +22,8 @@ As operações consideradas incluem inserção, remoção, busca e consulta de e
 
 Esta parte aborda duas estruturas lineares:
 
-- **Pilha (LIFO — Last In, First Out):** o último elemento inserido é o primeiro a ser removido. As operações típicas são empilhar (*push*), desempilhar (*pop*) e consultar o topo.
-- **Fila (FIFO — First In, First Out):** o primeiro elemento inserido é o primeiro a ser removido. As operações típicas são enfileirar, desenfileirar e consultar o início.
+- **Pilha (LIFO — Last In, First Out):** o último elemento inserido é o primeiro a ser removido. As operações típicas são `Empilhar`, `Desempilhar` e `ConsultarTopo`.
+- **Fila (FIFO — First In, First Out):** o primeiro elemento inserido é o primeiro a ser removido. As operações típicas são `Enfileirar`, `Desenfileirar` e `ConsultarFrente`.
 
 Quando implementadas de modo adequado, as operações principais de inserção e remoção podem ter complexidade **O(1)**. O custo efetivo depende da representação escolhida.
 
