@@ -18,6 +18,7 @@ private:
      ~ListaDuplamenteEncadeada();
      ListaDuplamenteEncadeada(const ListaDuplamenteEncadeada&)=delete;
      ListaDuplamenteEncadeada& operator=(const ListaDuplamenteEncadeada&)=delete;
+     void Imprimir() const;
      bool InserirNoInicio(Elemento*);
      bool InserirNoFim(Elemento*);
      Elemento* RemoverPrimeiro();

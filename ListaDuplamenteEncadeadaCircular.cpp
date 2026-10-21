@@ -1,4 +1,6 @@
 #include "ListaDuplamenteEncadeadaCircular.h"
+#include <iostream>
+
 ListaDuplamenteEncadeadaCircular::ListaDuplamenteEncadeadaCircular():inicio(nullptr),tamanho(0) {
 
 }
@@ -104,4 +106,17 @@ bool ListaDuplamenteEncadeadaCircular::Vazia()const {
 int ListaDuplamenteEncadeadaCircular::GetTamanho()const {
     return tamanho;
 
+}
+void ListaDuplamenteEncadeadaCircular::Imprimir() const {
+    if (!inicio) {
+        std::cout << "Lista vazia." << std::endl;
+        return;
+    }
+    
+    No* p = inicio;
+    do {
+        p->dado->ImprimirInfo();
+        std::cout << "-----------------------" << std::endl;
+        p = p->prox;
+    } while (p != inicio);
 }

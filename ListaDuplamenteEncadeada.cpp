@@ -1,4 +1,6 @@
 #include "ListaDuplamenteEncadeada.h"
+#include <iostream>
+
 ListaDuplamenteEncadeada::ListaDuplamenteEncadeada():inicio(nullptr),fim(nullptr),tamanho(0) {
 
 }
@@ -83,4 +85,17 @@ bool ListaDuplamenteEncadeada::Vazia()const {
 int ListaDuplamenteEncadeada::GetTamanho()const {
     return tamanho;
 
+}
+void ListaDuplamenteEncadeada::Imprimir() const {
+    if (!inicio) {
+        std::cout << "Lista vazia." << std::endl;
+        return;
+    }
+
+    No* p = inicio;
+    while (p != nullptr) {
+        p->dado->ImprimirInfo();
+        std::cout << "-----------------------" << std::endl;
+        p = p->prox;
+    }
 }

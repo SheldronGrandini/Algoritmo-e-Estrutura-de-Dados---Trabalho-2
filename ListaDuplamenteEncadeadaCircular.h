@@ -17,6 +17,7 @@ private:
      ~ListaDuplamenteEncadeadaCircular();
      ListaDuplamenteEncadeadaCircular(const ListaDuplamenteEncadeadaCircular&)=delete;
      ListaDuplamenteEncadeadaCircular& operator=(const ListaDuplamenteEncadeadaCircular&)=delete;
+     void Imprimir() const;
      bool InserirNoInicio(Elemento*);
      bool InserirNoFim(Elemento*);
      Elemento* RemoverPrimeiro();

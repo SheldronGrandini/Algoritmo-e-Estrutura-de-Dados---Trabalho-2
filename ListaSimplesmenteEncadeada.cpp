@@ -1,4 +1,6 @@
 #include "ListaSimplesmenteEncadeada.h"
+#include <iostream>
+
 ListaSimplesmenteEncadeada::ListaSimplesmenteEncadeada():inicio(nullptr),fim(nullptr),tamanho(0) {
 
 }
@@ -83,4 +85,17 @@ bool ListaSimplesmenteEncadeada::Vazia()const {
 int ListaSimplesmenteEncadeada::GetTamanho()const {
     return tamanho;
 
+}
+void ListaSimplesmenteEncadeada::Imprimir() const {
+    if (!inicio) {
+        std::cout << "Lista vazia." << std::endl;
+        return;
+    }
+
+    No* p = inicio;
+    while (p != nullptr) {
+        p->dado->ImprimirInfo();
+        std::cout << "-----------------------" << std::endl;
+        p = p->prox;
+    }
 }

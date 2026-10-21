@@ -18,6 +18,7 @@ private:
      ~ListaSimplesmenteEncadeada();
      ListaSimplesmenteEncadeada(const ListaSimplesmenteEncadeada&)=delete;
      ListaSimplesmenteEncadeada& operator=(const ListaSimplesmenteEncadeada&)=delete;
+     void Imprimir() const;
      bool InserirNoInicio(Elemento*);
      bool InserirNoFim(Elemento*);
      Elemento* RemoverPrimeiro();
